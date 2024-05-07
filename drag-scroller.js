@@ -82,7 +82,7 @@ export class DragScroller {
 		}
 		setTimeout(() => {
 			this.increments[index].scrollIntoView(this.snap);
-		}, 10);
+		}, 50);
 	}
 
 	decayScroll() {
