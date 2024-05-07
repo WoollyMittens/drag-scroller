@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Drag Scroller</title>
+		<meta name="viewport" content="initial-scale=1, minimum-scale=1, maximum-scale=1, width=device-width"/>
+		<style>
+			body { font-family: sans-serif; padding: 2rem; background-color: #fff; color: #333; }
+			.drag-scroller {
+				border: solid 1px #333; width: 100%; overflow: auto; scrollbar-width: none; scroll-snap-type: x mandatory; margin: 0 0 2rem;
+				>div { display: flex; }
+				article { display: flex; align-items: center; justify-content: center; aspect-ratio: 4 / 3; height: 20rem; border: solid 1px #CCC; font-size: 3rem; font-weight: bold; }
+				&.snap article { scroll-snap-align: start; }
+			}
+			@media (pointer:fine) {
+				.drag-scroller { overflow: hidden; scroll-snap-type: initial; }
+			}
+		</style>
+		<script src="drag-scroller.js" type="module"></script>
+	</head>
+	<body>
+
+		<h2>Snap Scroll</h2>
+
+		<section class="drag-scroller snap">
+			<div>
+				<article>1</article>
+				<article>2</article>
+				<article>3</article>
+				<article>4</article>
+				<article>5</article>
+				<article>6</article>
+				<article>7</article>
+				<article>8</article>
+				<article>9</article>
+			</div>
+		</section>
+
+		<h2>Inertia Scroll</h2>
+
+		<section class="drag-scroller inertia">
+			<div>
+				<article>1</article>
+				<article>2</article>
+				<article>3</article>
+				<article>4</article>
+				<article>5</article>
+				<article>6</article>
+				<article>7</article>
+				<article>8</article>
+				<article>9</article>
+			</div>
+		</section>
+
+		<script>
+			addEventListener("DOMContentLoaded", () => {
+
+				// start the snapping scroll example
+				const snapScroller = new DragScroller({
+					container: document.querySelector('.drag-scroller.snap'),
+					increments: document.querySelectorAll('.drag-scroller.snap article'),
+					snap: { behavior: "smooth", block: "nearest", inline: "start" },
+					scrollHandler: () => {},
+					interactionHandler: () => {}
+				});
+
+				// start the inertia scroll example
+				const inertiaScoller = new DragScroller({
+					container: document.querySelector('.drag-scroller.inertia'),
+					decay: 0.9,
+					scrollHandler: () => {}
+				});
+
+			});
+		</script>
+	</body>
+</html>
