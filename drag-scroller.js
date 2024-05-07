@@ -1,6 +1,6 @@
 /*! Drag Scroller v0.0.1 - (c) 2024 Maurice van Creij - MIT License - https://github.com/WoollyMittens */
 
-class DragScroller {
+export class DragScroller {
 	constructor(config) {
 		this.config = config;
 		this.container = config.container;
@@ -67,11 +67,11 @@ class DragScroller {
 		if (direction === 0) return;
 		const containerRect = this.container.getBoundingClientRect();
 		let increment = (direction > 0) ? -1 : 1;
-		let index = (increment < 0) ? this.increments.length - 1 : -1 ;
+		let index = (increment < 0) ? this.increments.length : -1 ;
 		let nearest = this.container.scrollWidth;
 		let distance = nearest;
 		let count = 0;
-		while (Math.abs(distance) <= Math.abs(nearest) && count < this.increments.length - 1) {
+		while (Math.abs(distance) <= Math.abs(nearest) && count < this.increments.length) {
 			count++;
 			index = index + increment;
 			nearest = distance;
